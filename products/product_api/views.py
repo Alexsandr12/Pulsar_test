@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,9 +13,11 @@ class ProductViewSet(mixins.RetrieveModelMixin,
     queryset = Products.objects.all()
     serializer_class = ProductsSerializers
 
+    @swagger_auto_schema(query_serializer=ProductsFilterSerializers,
+                         operation_summary="Поиск продуктов по заданным фильтрам.")
     @action(methods=["get"], detail=False, url_path="filter")
     def products(self, request):
-        """Поиск продуктов по заданным фильтрам."""
+        """Возвращает список продуктов по заданным фильтрам."""
         serializer = ProductsFilterSerializers(data=request.GET, partial=True)
         serializer.is_valid(raise_exception=True,)
         data_req = serializer.validated_data
@@ -22,6 +25,7 @@ class ProductViewSet(mixins.RetrieveModelMixin,
 
         return Response(ProductsSerializers(products_list, many=True).data)
 
+    @swagger_auto_schema(operation_summary="Поиск продукта по артиклю.")
     def retrieve(self, request, *args, **kwargs):
-        """Возвращает VPS-сервер по uid."""
+        """Возвращает продукт по артиклю."""
         return super().retrieve(request, *args, **kwargs)
