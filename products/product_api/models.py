@@ -3,7 +3,7 @@ from .myfields import WEBPField
 
 
 class Products(models.Model):
-    article = models.PositiveIntegerField(unique=True)
+    article = models.PositiveIntegerField(primary_key=True)
     name_product = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = WEBPField(upload_to="images/product/")
