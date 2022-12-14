@@ -12,9 +12,6 @@ class ProductViewSet(mixins.RetrieveModelMixin,
     queryset = Products.objects.all()
     serializer_class = ProductsSerializers
 
-    # @swagger_auto_schema(query_serializer=VpsSerializers,
-    #                      operation_summary="Получение списка VPS-серверов по заданным фильтрам.",
-    #                      operation_description=status_desc)
     @action(methods=["get"], detail=False, url_path="filter")
     def products(self, request):
         """Поиск продуктов по заданным фильтрам."""
