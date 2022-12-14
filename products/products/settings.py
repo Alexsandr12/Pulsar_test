@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'products.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'pulsar_test',
-        'HOST': 'ALEXANDR-PK',
-        'OPTIONS': {
-                    'driver': 'ODBC Driver 17 for SQL Server',
-                }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
